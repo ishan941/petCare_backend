@@ -9,7 +9,7 @@ export abstract class BaseRepository<T> implements OpWrite<T>, OpRead<T> {
   protected constructor(model: unknown) {
     this.model = model;
   }
-
+  abstract deleteById(id: number): Promise<boolean>;
   abstract create(item: T): Promise<T>;
 
   abstract update(id: string, item: T): Promise<T>;

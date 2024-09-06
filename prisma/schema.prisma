@@ -22,7 +22,7 @@ model SignUp {
   shopCart       String?                        // Shopping cart (optional)
   myPetData      String?                        // My pet data (optional)
   userImage      String?                        // Image of the user (optional)
-  roles          String[]                       // List of roles as an array of strings
+  roles          Role[]                       // List of roles as an array of strings
   Authorization Authorization[]
 }
 model Authorization {
@@ -46,4 +46,10 @@ model Roles{
   role Role @unique 
 
   Authorization Authorization[]
+}
+//ads
+
+model Ads {
+  id        Int    @id @default(autoincrement())
+  adsImage  String?
 }
