@@ -1,0 +1,49 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+model SignUp {
+  id             String    @id @default(uuid()) // Primary key, auto-generated UUID
+  email          String    @unique              // Email, must be unique
+  password       String                         // Password for the user
+  name           String                         // Name of the user
+  phone          String                         // Phone number of the user
+  favourite      String?                        // Favourite item (optional)
+  shopCart       String?                        // Shopping cart (optional)
+  myPetData      String?                        // My pet data (optional)
+  userImage      String?                        // Image of the user (optional)
+  roles          String[]                       // List of roles as an array of strings
+  Authorization Authorization[]
+}
+model Authorization {
+  id        Int    @id @default(autoincrement())
+  userId    String
+  path      String
+  method    String[]
+
+  user      SignUp   @relation(fields: [userId], references: [id])
+  role       Roles @relation(fields: [roleId], references: [roleId])
+  roleId    String 
+}
+enum Role {
+  ADMIN
+  STUDENT
+  TEACHER
+}
+model Roles{
+
+  roleId String @id
+  role Role @unique 
+
+  Authorization Authorization[]
+}
