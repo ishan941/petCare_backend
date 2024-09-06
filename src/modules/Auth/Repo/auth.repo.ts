@@ -6,6 +6,9 @@ import { PGDatabaseService } from "src/core /Database/pg.database.service";
 
 @Injectable()
 export class AuthRepo extends BaseRepository<SignUp> {
+  deleteById(id: number): Promise<boolean> {
+    throw new Error("Method not implemented.");
+  }
   constructor(private pgDatabaseServise: PGDatabaseService) {
     super(pgDatabaseServise.prismaRead.signUp);
   }
