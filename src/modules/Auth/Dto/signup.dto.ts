@@ -1,14 +1,7 @@
-import {
-    IsEmail,
-    IsEnum,
-    IsNotEmpty,
-    IsOptional,
-    IsString,
-    IsArray,
-    IsUUID
-} from '@nestjs/class-validator';
+
 import { ApiProperty } from '@nestjs/swagger';
 import { Role } from '@prisma/client';
+import { IsEmail, IsEnum, IsNotEmpty, IsOptional, IsString, IsUUID } from 'class-validator';
 
 export default class UserDto {
     @ApiProperty()
