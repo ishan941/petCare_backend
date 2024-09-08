@@ -32,7 +32,7 @@ export class AdsController {
     },
   })
   @UseInterceptors(FileInterceptor('image', {
-    dest: '/home/shakti/Pictures', // Ensure this path exists and is writable
+    dest: '/Users/ishanshrestha/nestjs/image_petCare/ads_image', 
     limits: {
       fileSize: 10 * 1024 * 1024, // 10MB limit
     },
