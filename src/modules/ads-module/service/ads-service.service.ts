@@ -9,8 +9,8 @@ export class AdsServiceService {
 
     async createAds(adsDto: AdsDto): Promise<Ads> {
         const newAd: Ads = {
-            id: adsDto.id,
             adsImage: adsDto.adsImage,
+            id: undefined
         };
         return this.adsRepo.create(newAd);
     }

@@ -33,7 +33,9 @@ export class AdsRepo extends BaseRepository<Ads> {
 
     async create(item: Ads): Promise<Ads> {
         return await this.pgDatabaseServise.prismaWrite.ads.create({
-            data: item,
+            data: {
+                adsImage: item.adsImage,
+            },
         });
     }
 
