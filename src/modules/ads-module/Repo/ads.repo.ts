@@ -31,11 +31,15 @@ export class AdsRepo extends BaseRepository<Ads> {
 
     }
 
-    async create(item: Ads): Promise<Ads> {
-        return await this.pgDatabaseServise.prismaWrite.ads.create({
-            data: item,
-        });
-    }
+  // Create a new ad
+  async create(item: Partial<Ads>): Promise<Ads> {
+    return await this.pgDatabaseServise.prismaWrite.ads.create({
+      data: {
+        // Exclude the `id`, let Prisma handle it with autoincrement
+        adsImage: item.adsImage,
+      },
+    });
+  }
 
     async find(): Promise<Ads[]> {
         return await this.pgDatabaseServise.prismaWrite.ads.findMany();

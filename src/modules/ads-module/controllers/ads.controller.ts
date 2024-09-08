@@ -3,17 +3,36 @@ import { AdsDto } from '../Dto/ads.dto';
 
 import { AdsServiceService } from '../service/ads-service.service';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { ApiProperty, ApiTags } from '@nestjs/swagger';
-import path from 'path';
+import { ApiBearerAuth, ApiBody, ApiConsumes, ApiProperty, ApiTags } from '@nestjs/swagger';
+import * as path from 'path';  // Correctly import the path module
+
+
 
 @ApiTags('Ads')
 @Controller('ads')
 export class AdsController {
   constructor(private readonly adsService: AdsServiceService) {}
-
-  @Post('addAds')
+  
+ 
+  @Post('/upload-photo')
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        image: {
+          type: 'string',
+          format: 'binary', // This tells Swagger to expect a file upload
+        },
+        adsImage: {
+          type: 'string',
+          description: 'Optional image path for the ad',
+        },
+      },
+    },
+  })
   @UseInterceptors(FileInterceptor('image', {
-    dest: '/home/shakti/Pictures', // Ensure this path is correct
+    dest: '/home/shakti/Pictures', // Ensure this path exists and is writable
     limits: {
       fileSize: 10 * 1024 * 1024, // 10MB limit
     },
@@ -24,19 +43,22 @@ export class AdsController {
       callback(null, true);
     },
   }))
-  async create(@UploadedFile() file: Express.Multer.File, @Body() adsDto: AdsDto) {
-    console.log('Received file:', file); // Should log file object or undefined
-    console.log('Ads DTO:', adsDto); // Should log the Ads DTO
+  async uploadSinglePhoto(
+    @UploadedFile() file: Express.Multer.File,
+    @Body() dto: AdsDto
+  ) {
+    console.log('Received file:', file); // Logs file object or undefined
+    console.log('Received DTO:', dto); // Logs the AdsDto object
 
     if (!file) {
       throw new BadRequestException('File not uploaded');
     }
 
-    const filePath = path.join('/uploads', file.filename); // Path to the uploaded image
+    const filePath = path.join('/home/shakti/Pictures', file.filename); // Match the destination path
     console.log('File path:', filePath);
 
-    // Call the service to create an ad
-    return this.adsService.createAds(adsDto, filePath);
+    // Create a new ad with the provided image path and other DTO data
+    return this.adsService.createAds({ ...dto, adsImage: filePath });
   }
   @Get('getAds')
   findAll() {

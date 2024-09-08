@@ -10,7 +10,7 @@ import { join } from 'path';
 @Module({
   imports: [
     ServeStaticModule.forRoot({
-      rootPath: '/home/shakti/Pictures', // Real path to your uploaded files
+      rootPath: join(__dirname, '..', 'uploads'), // Path to your uploaded files
       serveRoot: '/uploads', // URL path to access the files
     }),
     // other imports
