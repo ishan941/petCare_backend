@@ -1,13 +1,13 @@
-import { Injectable } from "@nestjs/common";
-import { SignUp } from "@prisma/client";
-import { emitWarning } from "process";
-import { BaseRepository } from "src/core /Database/interface/baserepository";
-import { PGDatabaseService } from "src/core /Database/pg.database.service";
+import { Injectable } from '@nestjs/common';
+import { SignUp } from '@prisma/client';
+import { emitWarning } from 'process';
+import { BaseRepository } from 'src/core/Database/interface/baserepository';
+import { PGDatabaseService } from 'src/core/Database/pg.database.service';
 
 @Injectable()
 export class AuthRepo extends BaseRepository<SignUp> {
   deleteById(id: number): Promise<boolean> {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
   constructor(private pgDatabaseServise: PGDatabaseService) {
     super(pgDatabaseServise.prismaRead.signUp);
