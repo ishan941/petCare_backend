@@ -1,8 +1,9 @@
 import { Injectable } from "@nestjs/common";
 import { Ads, SignUp } from "@prisma/client";
 import { emitWarning } from "process";
-import { BaseRepository } from "src/core /Database/interface/baserepository";
-import { PGDatabaseService } from "src/core /Database/pg.database.service";
+import { BaseRepository } from "src/core/Database/interface/baseRepository";
+import { PGDatabaseService } from "src/core/Database/pg.database.service";
+
 
 @Injectable()
 export class AdsRepo extends BaseRepository<Ads> {

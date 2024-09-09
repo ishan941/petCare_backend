@@ -1,7 +1,5 @@
-import { OpRead } from "./op.read";
 import { OpWrite } from "./op.write";
-
-
+import { OpRead } from "./op.read";
 
 export abstract class BaseRepository<T> implements OpWrite<T>, OpRead<T> {
   protected model: unknown;
