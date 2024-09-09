@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { SignUp } from "@prisma/client";
+import { $Enums, SignUp } from "@prisma/client";
 import { emitWarning } from "process";
 import { BaseRepository } from "src/core/Database/interface/baseRepository";
 import { PGDatabaseService } from "src/core/Database/pg.database.service";
@@ -7,6 +7,9 @@ import { PGDatabaseService } from "src/core/Database/pg.database.service";
 
 @Injectable()
 export class AuthRepo extends BaseRepository<SignUp> {
+  updateById(id: number, item: { id: string; email: string; password: string; name: string; phone: string; favourite: string | null; shopCart: string | null; myPetData: string | null; userImage: string | null; roles: $Enums.Role[]; }) {
+    throw new Error("Method not implemented.");
+  }
   deleteById(id: number): Promise<boolean> {
     throw new Error("Method not implemented.");
   }

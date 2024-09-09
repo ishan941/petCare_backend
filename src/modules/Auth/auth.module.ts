@@ -27,7 +27,7 @@ import { PGDatabaseService } from 'src/core/Database/pg.database.service';
     PGDatabaseService,
   ],
   exports: [AuthService,
-    JwtStrategy
+    JwtStrategy, PGDatabaseService
   ],
 })
 export class AuthModule {}

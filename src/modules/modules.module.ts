@@ -7,6 +7,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { AdsModuleModule } from './ads-module/ads-module.module';
 import { AppController } from '../core/App/app.controller';
 import { AppService } from '../core/App/app.service';
+import { CategoriesModule } from './categories/categories.module';
 
 @Module({
 
@@ -17,10 +18,11 @@ import { AppService } from '../core/App/app.service';
         AuthModule,
         PrismaModule,
         JwtModule,
-        AdsModuleModule
+        AdsModuleModule,
+        CategoriesModule
 
     ],
-    controllers: [AppController],
+    controllers: [AppController,],
     providers: [AppService,],
 })
 export class ModulesModule {

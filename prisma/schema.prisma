@@ -12,44 +12,54 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
 model SignUp {
-  id             String    @id @default(uuid()) // Primary key, auto-generated UUID
-  email          String    @unique              // Email, must be unique
-  password       String                         // Password for the user
-  name           String                         // Name of the user
-  phone          String                         // Phone number of the user
-  favourite      String?                        // Favourite item (optional)
-  shopCart       String?                        // Shopping cart (optional)
-  myPetData      String?                        // My pet data (optional)
-  userImage      String?                        // Image of the user (optional)
-  roles          Role[]                       // List of roles as an array of strings
+  id            String          @id @default(uuid()) // Primary key, auto-generated UUID
+  email         String          @unique // Email, must be unique
+  password      String // Password for the user
+  name          String // Name of the user
+  phone         String // Phone number of the user
+  favourite     String? // Favourite item (optional)
+  shopCart      String? // Shopping cart (optional)
+  myPetData     String? // My pet data (optional)
+  userImage     String? // Image of the user (optional)
+  roles         Role[] // List of roles as an array of strings
   Authorization Authorization[]
 }
-model Authorization {
-  id        Int    @id @default(autoincrement())
-  userId    String
-  path      String
-  method    String[]
 
-  user      SignUp   @relation(fields: [userId], references: [id])
-  role       Roles @relation(fields: [roleId], references: [roleId])
-  roleId    String 
+model Authorization {
+  id     Int      @id @default(autoincrement())
+  userId String
+  path   String
+  method String[]
+
+  user   SignUp @relation(fields: [userId], references: [id])
+  role   Roles  @relation(fields: [roleId], references: [roleId])
+  roleId String
 }
+
 enum Role {
   ADMIN
   STUDENT
   TEACHER
 }
-model Roles{
 
+model Roles {
   roleId String @id
-  role Role @unique 
+  role   Role   @unique
 
   Authorization Authorization[]
 }
+
 //ads
 
 model Ads {
-  id        Int    @id @default(autoincrement())
-  adsImage  String?
+  id       Int     @id @default(autoincrement())
+  adsImage String?
+}
+
+model Category{
+  id              Int     @id @default(autoincrement())
+  categoriesImage String?
+  categoriesName  String?
 }

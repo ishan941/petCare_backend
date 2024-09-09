@@ -8,6 +8,8 @@ import { PGDatabaseService } from "src/core/Database/pg.database.service";
 @Injectable()
 export class AdsRepo extends BaseRepository<Ads> {
 
+  
+
     constructor(private pgDatabaseServise: PGDatabaseService) {
         super(pgDatabaseServise.prismaRead.signUp);
     }
@@ -58,6 +60,13 @@ export class AdsRepo extends BaseRepository<Ads> {
             return false;
         }
     }
+
+    async updateById(id: number, item: { id: number; adsImage: string | null; }) {
+        return await this.pgDatabaseServise.prismaWrite.ads.update({
+          where: {id: id},
+          data: item
+        }) 
+      }
 
 
     async findUnique(email: string): Promise<SignUp | null> {
