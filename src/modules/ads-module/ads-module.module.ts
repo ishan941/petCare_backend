@@ -13,10 +13,10 @@ import { PGDatabaseService } from 'src/core/Database/pg.database.service';
   imports: [
 
     // file saving
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'uploads'), // Path to your uploaded files
-      serveRoot: '/uploads', // URL path to access the files
-    }),
+    // ServeStaticModule.forRoot({
+    //   rootPath: join(__dirname, '..', 'uploads'), // Path to your uploaded files
+    //   serveRoot: '/uploads', // URL path to access the files
+    // }),
     // other imports
   ],
   controllers: [AdsController],

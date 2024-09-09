@@ -217,7 +217,7 @@ export class AuthService {
     if (!loginDto.email || !loginDto.password) {
       throw new ForbiddenException('Email and password must be provided');
     }
-  
+
     // Find user by email
     const user = await this.authentication.findUnique(loginDto.email);
   

@@ -6,7 +6,7 @@ import { Ads } from '@prisma/client';
 @Injectable()
 export class AdsServiceService {
     constructor(private readonly adsRepo: AdsRepo) { }
-    async createAds(adsDto: AdsDto): Promise<any> {
+    async createAds(adsDto: AdsDto){
         const newAd = {
           ...adsDto,
           adsImage: adsDto.adsImage, // Save the image path to the database
