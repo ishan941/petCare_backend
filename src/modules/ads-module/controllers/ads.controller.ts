@@ -12,8 +12,6 @@ import * as path from 'path';  // Correctly import the path module
 @Controller('ads')
 export class AdsController {
   constructor(private readonly adsService: AdsServiceService) {}
-  
- 
   @Post('/upload-photo')
   @ApiConsumes('multipart/form-data')
   @ApiBody({
@@ -32,7 +30,7 @@ export class AdsController {
     },
   })
   @UseInterceptors(FileInterceptor('image', {
-    dest: '/Users/ishanshrestha/nestjs/image_petCare/ads_image', 
+    dest: '/home/shakti/Pictures', // Ensure this path exists and is writable
     limits: {
       fileSize: 10 * 1024 * 1024, // 10MB limit
     },
@@ -49,17 +47,22 @@ export class AdsController {
   ) {
     console.log('Received file:', file); // Logs file object or undefined
     console.log('Received DTO:', dto); // Logs the AdsDto object
-
+  
     if (!file) {
       throw new BadRequestException('File not uploaded');
     }
-
+  
     const filePath = path.join('/home/shakti/Pictures', file.filename); // Match the destination path
     console.log('File path:', filePath);
-
+  
     // Create a new ad with the provided image path and other DTO data
-    return this.adsService.createAds({ ...dto, adsImage: filePath });
+    await this.adsService.createAds({ ...dto, adsImage: filePath });
+  
+    // Return a success message instead of the file or saved data
+    return { message: 'Ad created successfully' };
   }
+  
+  
   @Get('getAds')
   findAll() {
     return this.adsService.getAllAds();
