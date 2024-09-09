@@ -54,7 +54,7 @@ export class AdsController {
       throw new BadRequestException('File not uploaded');
     }
 
-    const filePath = path.join('/home/shakti/Pictures', file.filename); // Match the destination path
+    const filePath = path.join('/Users/ishanshrestha/nestjs/image_petCare/ads_image', file.filename); // Match the destination path
     console.log('File path:', filePath);
 
     // Create a new ad with the provided image path and other DTO data

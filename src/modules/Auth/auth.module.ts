@@ -26,7 +26,7 @@ import { AuthRepo } from './Repo/auth.repo';
     PGDatabaseService,
   ],
   exports: [AuthService,
-    JwtStrategy
+    JwtStrategy, PGDatabaseService
   ],
 })
 export class AuthModule {}
