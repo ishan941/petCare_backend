@@ -58,8 +58,15 @@ model Ads {
   adsImage String?
 }
 
-model Category{
+model Category {
   id              Int     @id @default(autoincrement())
   categoriesImage String?
   categoriesName  String?
+}
+
+model OurService {
+  id      Int     @id @default(autoincrement())
+  cpImage String?
+  ppImage String?
+  service String?
 }
